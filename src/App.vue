@@ -1,28 +1,40 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" >
+    <HelloWorld msg="App con Vue-Cli y Buefy"/>       
+    <Navbar v-bind:menuActive="menuActive" />
+    <section class="section" id="main">
+      <Home v-if="menuActive.home" />
+      <Form v-else-if="menuActive.form" />
+    </section>
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>Creado por <strong>Carlos Eduardo Mera Ruiz</strong></p>
+      </div>
+    </footer>
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import Navbar from './components/Navbar'
+import Home from './components/Home'
+import Form from './components/Form'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    HelloWorld,
+    Navbar,
+    Home,
+    Form
+  },
+  data() {
+    return {
+      menuActive: {
+        home: true,
+        form: false
+      }
+    }
+  },
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
